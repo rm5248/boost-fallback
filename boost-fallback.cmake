@@ -63,3 +63,11 @@ try_compile(Boost_SHARED_MUTEX_FOUND "${CMAKE_BINARY_DIR}/boost-fallback-compile
     LINK_LIBRARIES Threads::Threads
 )
 
+# Link the target with the appropriate boost libraries(if required)
+function(boostfallback_link target)
+    if(NOT ${STD_THREAD_FOUND} AND ${Boost_THREAD_FOUND})
+	target_link_libraries( ${target} PUBLIC Boost::thread)
+    endif()
+endfunction()
+
+

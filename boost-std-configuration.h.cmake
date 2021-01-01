@@ -26,13 +26,15 @@ namespace ${NAMESPACE_ALIAS} {
 #include <mutex>
 namespace ${NAMESPACE_ALIAS} {
     typedef std::mutex mutex;
-    typedef std::unique_lock unique_lock;
+    template <typename T>
+    using unique_lock = std::unique_lock<T>;
 }
 #elif Boost_MUTEX_FOUND
 #include <boost/thread.hpp>
 namespace ${NAMESPACE_ALIAS} {
     typedef boost::mutex mutex;
-    typedef boost::unique_lock unique_lock;
+    template <typename T>
+    using unique_lock = boost::unique_lock<T>;
 }
 #endif
 
@@ -40,13 +42,15 @@ namespace ${NAMESPACE_ALIAS} {
 #include <shared_mutex>
 namespace ${NAMESPACE_ALIAS} {
     typedef std::shared_mutex shared_mutex;
-    typedef std::shared_lock shared_lock;
+    template <typename T>
+    using shared_lock = std::shared_lock<T>;
 }
 #elif Boost_SHARED_MUTEX_FOUND
 #include <boost/thread/shared_mutex.hpp>
 namespace ${NAMESPACE_ALIAS} {
     typedef boost::shared_mutex shared_mutex;
-    typedef boost::shared_lock shared_lock;
+    template <typename T>
+    using shared_lock = boost::shared_lock<T>;
 }
 #endif
 
