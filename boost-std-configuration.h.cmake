@@ -24,10 +24,12 @@ namespace ${NAMESPACE_ALIAS} {
 
 #if STD_MUTEX_FOUND
 #include <mutex>
+#include <condition_variable>
 namespace ${NAMESPACE_ALIAS} {
     typedef std::mutex mutex;
     template <typename T>
     using unique_lock = std::unique_lock<T>;
+    typedef std::condition_variable condition_variable;
 }
 #elif Boost_MUTEX_FOUND
 #include <boost/thread.hpp>
@@ -35,6 +37,7 @@ namespace ${NAMESPACE_ALIAS} {
     typedef boost::mutex mutex;
     template <typename T>
     using unique_lock = boost::unique_lock<T>;
+    typedef boost::condition_variable condition_variable;
 }
 #endif
 
